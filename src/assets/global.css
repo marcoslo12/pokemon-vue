@@ -1,0 +1,23 @@
+[tema="light"]{
+    --color-fuente: black;
+    --color-fondo: white;
+    --color-button: #222222;
+    --color-card: white;
+    --color-fondo-search: #f4f2f2;
+    --color-texto-search: #646464;
+}
+  
+ [tema="dark"] {
+    --color-fuente: white;
+    --color-fondo: #343436;
+    --color-button: white;
+    --color-card: #343436;
+    --color-fondo-search: #646464;
+    --color-texto-search: #f4f2f2;
+ }
+
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-fuente);
+    text-align: center;
+}
