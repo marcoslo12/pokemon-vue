@@ -47,13 +47,13 @@ export default {
   methods: {
     resultado(resultat) {
       this.resultat = resultat;
-      // es muy mala práctica acceder al DOm desde vueConfig, el objetivo de Vue es hacer el código más declarativo 
+      // es muy mala práctica acceder al DOm desde cualquier componente VUE, el objetivo de VUE es hacer el código más declarativo,
       // voy a cambiar estos dos accesos al Dom para que veas un ejemplo.
       // 1.- Creo un estado en mi componente isVisible = false, la primera vez estarán ocultos, linea 33.
       // 2.- Creo una clase que contenga el comportamiento que quiero que tenga estos elementos, .visible { visibility: visible !important; } linea 123.
       //      He tenido que usar !important por la especifidad que estas usando, usar ID para dar estilos es muy mala práctica, se aconseja clases.
       // 3.- Pongo el class condition en los elementos que deseo que sean visibles. Los botones (linea 13 y 20) :class="{ 'visible' : resultat }" esto quiere decir
-      //     que cuando resultado sea verdadero ("" string vacio es falso, cualquier String es true) se añadirá la clase visible y se harán visibles los botones.
+      //     que cuando resultat sea verdadero ("" string vacio es falso, cualquier String es true) se añadirá la clase visible y se harán visibles los botones.
 
       // document.getElementById("reload").style.visibility = "visible";
       // document.getElementById("reload2").style.visibility = "visible";
@@ -63,8 +63,9 @@ export default {
       while (element.length > 0) {
         element[0].classList.remove("is-flipped");
       }
-      document.getElementById("reload").style.visibility = "hidden";
-      document.getElementById("reload2").style.visibility = "hidden";
+      // Esto ya no cal. si pones result a String vacio esto da falso y no se dibujarían los botones de arriba.
+      // document.getElementById("reload").style.visibility = "hidden";
+      // document.getElementById("reload2").style.visibility = "hidden";
       this.resultat = "";
 
       //eliminen la funcio onclick
