@@ -10,10 +10,10 @@
   </div>
   <p>{{ this.resultat }}</p>
   <div class="buttons">
-    <button id="reload" @click="reload">
+    <button :class="{ 'visible': resultat }" id="reload" @click="reload">
       Un altre combat amb les mateixes cartes
     </button>
-    <button id="reload2" onclick="location.reload();">
+    <button :class="{ 'visible': resultat }" id="reload2" onclick="location.reload();">
       Un altre combat amb cartes diferents
     </button>
   </div>
@@ -29,6 +29,7 @@ export default {
     return {
       pokemon: [],
       resultat: "",
+      isVisible: false,
     };
   },
   created() {
@@ -46,8 +47,16 @@ export default {
   methods: {
     resultado(resultat) {
       this.resultat = resultat;
-      document.getElementById("reload").style.visibility = "visible";
-      document.getElementById("reload2").style.visibility = "visible";
+      // es muy mala práctica acceder al DOm desde vueConfig, el objetivo de Vue es hacer el código más declarativo 
+      // voy a cambiar estos dos accesos al Dom para que veas un ejemplo.
+      // 1.- Creo un estado en mi componente isVisible = false, la primera vez estarán ocultos, linea 33.
+      // 2.- Creo una clase que contenga el comportamiento que quiero que tenga estos elementos, .visible { visibility: visible !important; } linea 123.
+      //      He tenido que usar !important por la especifidad que estas usando, usar ID para dar estilos es muy mala práctica, se aconseja clases.
+      // 3.- Pongo el class condition en los elementos que deseo que sean visibles. Los botones (linea 13 y 20) :class="{ 'visible' : resultat }" esto quiere decir
+      //     que cuando resultado sea verdadero ("" string vacio es falso, cualquier String es true) se añadirá la clase visible y se harán visibles los botones.
+
+      // document.getElementById("reload").style.visibility = "visible";
+      // document.getElementById("reload2").style.visibility = "visible";
     },
     reload() {
       var element = document.getElementsByClassName("is-flipped");
@@ -109,5 +118,9 @@ button:hover {
 p {
   text-align: center;
   font-size: 22px;
+}
+
+.visible {
+  visibility: visible !important;
 }
 </style>
